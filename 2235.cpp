@@ -1,20 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-int main() {
  
+int main() {
     int A, B, C;
-    set<int> s;
-
+    vector<int> tmp;
+    vector<int>::iterator it;
+    
     cin >> A >> B >> C;
-
-    s.insert(A);
-    s.insert(B);
-    s.insert(C);
-
-    if(s.size() == 2) cout << "N" << endl;
     
+    tmp.push_back(A);
     
-
+    it = find(tmp.begin(), tmp.end(), B);
+    if(it == tmp.end()) tmp.push_back(B);
+    
+    it = find(tmp.begin(), tmp.end(), C);
+    if(it == tmp.end()) tmp.push_back(C);
+    
+    sort(tmp.begin(), tmp.end());
+    
+    if (tmp.size() < 3 || tmp[0]+tmp[1]-tmp[2] == 0 ) cout << "S" << endl;
+    else cout << "N" << endl;
     return 0;
 }
