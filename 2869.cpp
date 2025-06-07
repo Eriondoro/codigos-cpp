@@ -48,15 +48,15 @@ int main(){
 
         for(size_t h = 0; h < fatoracao.size(); h++){
             for(size_t k = 0; k < fatoracao[h].size(); k++) {
+                aux = 1;
                 aux *= (fatoracao[h][k]-1) * log(primo[k]);
                 aux = aux % N;
+                
+                if(m < aux){
+                    m = aux;
+                    a = h;
+                }
             }
-
-            if(m < aux){
-                m = aux;
-                a = h;
-            }
-            aux = 1;
         }
 
         aux = 1;
