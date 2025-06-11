@@ -9,8 +9,8 @@ int main(){
         for(i=0; i<w; i++){
             for(j=0; j<w; j++){
                 // abs faz 3-2 e 2-3 serem 1 "positivo"
-                cout << abs(i-j)+1;
-                if(j < w-1) cout << " ";
+                printf("%3d", abs(i-j)+1);
+                if(j != w-1) cout << " ";
             }
             cout << endl;
         }
