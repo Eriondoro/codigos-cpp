@@ -17,7 +17,8 @@ long long fast_expo(long long a, long long b, long long M) {
 
 
 int main(){
-    int z, n, m, i, j, a, aux=1, maior=0;
+    int z, n, m, i, j, a, aux=1, maior;
+
     cin >> z;
     vector<int> f1, primo = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29};
     vector<vector<int>> fatoracao;
@@ -33,6 +34,8 @@ int main(){
         }
 
         while(j > 1){
+            maior=999999999;
+
             i = j;
             // while(i >= 2){
             //     if(n % i == 0){
@@ -52,23 +55,26 @@ int main(){
                 } else break;
                 if(m == 1) break;
             }
-            cout << "troca" << endl;
-
+            
             for(int h=0; h < f1.size(); h++) {
                 aux = 1;
                 cout << "primo: " << primo[h] << " it: " << f1[h]-1 << endl;
-                aux *= fast_expo(primo[h], f1[h]-1, N);
+                aux *= fast_expo(primo[h], f1[h]-1, N) % N;
                 // aux *= ((*it)[k]-1) * log(primo[k]);
                 aux = aux % N;
                 
             }
+            cout << "aux: " << aux << "\ntroca" << endl;
             
-            if(maior < aux){
+            if(maior > aux){
                 maior = aux;
                 cout << "maior: " << maior << endl;
+                fatoracao.clear();
                 fatoracao.push_back(f1);
                 // a = h;
             }
+
+            f1.clear();
 
             m = n;
             j--;
@@ -83,8 +89,8 @@ int main(){
         // }
 
         aux = 1;
-        for(size_t k = 0; k < fatoracao[a].size(); k++){
-            aux *= fast_expo(primo[k], fatoracao[a][k]-1, N);
+        for(size_t k = 0; k < fatoracao[0].size(); k++){
+            aux *= fast_expo(primo[k], fatoracao[0][k]-1, N) % N;
         }
 
         cout << aux << endl;
