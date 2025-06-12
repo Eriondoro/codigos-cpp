@@ -17,19 +17,19 @@ long long fast_expo(long long a, long long b, long long M) {
 
 
 int main(){
-    int z, n, m, i, j, a, aux=1, maior;
+    int casos_teste, num, m, i, j, a, aux=1, maior;
 
-    cin >> z;
-    vector<int> f1, primo = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29};
-    vector<vector<int>> fatoracao;
+    cin >> casos_teste;
+    vector<int> particao_mult, primo = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29};
+    vector<int> fatoracao;
     vector<int>::iterator it;
 
-    while(z--){
-        cin >> n;
-        m = j = n;
+    while(casos_teste--){
+        cin >> num;
+        m = j = num;
 
-        if(n == 1 || n == 0){
-            cout << m << endl;
+        if(num == 1 || num == 0){
+            cout << num << endl;
             continue;
         }
 
@@ -37,46 +37,40 @@ int main(){
             maior=999999999;
 
             i = j;
-            // while(i >= 2){
-            //     if(n % i == 0){
-            //         f1.push_back(i);
-            //         m /= i;
-            //         if(m % i != 0) i--;
-            //     } else break;
-            //     if(m == 1) break;
-            // }
             while(i >= 2){
                 cout << "m: " << m << " i: " << i << endl;
-                if(n % i == 0){
+                if(m % i == 0){
                     cout << "i: " << i << endl;
-                    f1.push_back(i);
+                    particao_mult.push_back(i);
                     m /= i;
                     if(m % i != 0) i--;
-                } else break;
+                } else i--;
                 if(m == 1) break;
             }
             
-            for(int h=0; h < f1.size(); h++) {
+            for(int h=0; h < particao_mult.size(); h++) {
                 aux = 1;
-                cout << "primo: " << primo[h] << " it: " << f1[h]-1 << endl;
-                aux *= fast_expo(primo[h], f1[h]-1, N) % N;
-                // aux *= ((*it)[k]-1) * log(primo[k]);
+                cout << "primo: " << primo[h] << " it: " << particao_mult[h]-1 << endl;
+                aux *= fast_expo(primo[h], particao_mult[h]-1, N) % N;
+                // aux *= (particao_mult[h]-1) * log(primo[h]);
                 aux = aux % N;
                 
             }
-            cout << "aux: " << aux << "\ntroca" << endl;
+            cout << "aux: " << aux << endl;
             
             if(maior > aux){
                 maior = aux;
                 cout << "maior: " << maior << endl;
                 fatoracao.clear();
-                fatoracao.push_back(f1);
+                fatoracao = particao_mult;
                 // a = h;
             }
 
-            f1.clear();
+            cout << endl << endl;
 
-            m = n;
+            particao_mult.clear();
+
+            m = num;
             j--;
         }
 
@@ -89,8 +83,9 @@ int main(){
         // }
 
         aux = 1;
-        for(size_t k = 0; k < fatoracao[0].size(); k++){
-            aux *= fast_expo(primo[k], fatoracao[0][k]-1, N) % N;
+        for(int k = 0; k < fatoracao.size(); k++){
+            cout << "primo: " << primo[k] << " it: " << fatoracao[k]-1 << endl;
+            aux *= fast_expo(primo[k], fatoracao[k]-1, N) % N;
         }
 
         cout << aux << endl;
