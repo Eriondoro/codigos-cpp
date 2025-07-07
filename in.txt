@@ -1,7 +1,4 @@
-6
-99
-93
-100
-90
-4
-8
+This is a dancing sentence
+  This   is         a  dancing   sentence  
+aaaaaaaaaaa
+z
